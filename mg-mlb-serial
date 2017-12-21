@@ -148,7 +148,7 @@ elif [ $# -eq 2 ]; then
 	gSerialNumber="$2"
 else
 	# None. Use the system model ID and system serial number (from the IORegistry)
-	gProductName=$(ioreg -k product-name -d 2 | awk '/product-name/ {print $3}' | tr -d '"<>')
+	gProductName=$(ioreg -k product-name -d 2 | awk '/product-name/ {print $3}' | tr -d '"<>,[:digit:]')
 	gSerialNumber=$(ioreg -k IOPlatformSerialNumber -d 2 | awk '/IOPlatformSerialNumber/ {print $3}' | tr -d '"')
 	if [ $gDebug -eq 1 ]; then
 		print_debug "NOTE" "No input product name found, using IORegistry value ($gProductName)"
